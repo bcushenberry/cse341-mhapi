@@ -13,11 +13,10 @@ const port = process.env.PORT || 8080;
 
 // Handle preflight requests
 app.options('*', cors());
-
 app.use(cors({
     origin: '*',
-    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'OPTIONS'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Z-Key']
 }));
 
 // Routes
