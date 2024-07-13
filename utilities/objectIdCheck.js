@@ -3,7 +3,8 @@ const createError = require('http-errors');
 const database = require('../db/database');
 
 const checkIdValidity = async (id, db, type) => {
-    const result = await database.getDb().db().collection(db).findOne({_id: id});
+    const objectId = new ObjectId(id);
+    const result = await database.getDb().db().collection(db).findOne({_id: objectId});
 
     if (!ObjectId.isValid(id)) {
         throw createError(400, 'Invalid ID format. Must be a valid ObjectId');
