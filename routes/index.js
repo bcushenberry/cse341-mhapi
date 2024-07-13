@@ -5,8 +5,8 @@ router.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-router.use('/weapons', require('./weapons'));
-router.use('/armor', require('./armor'));
+router.use('/weapons', require('../controllers/weapons'));
+router.use('/armor', require('../controllers/armor'));
 router.use('/api-docs', require('./swagger'));
 
 module.exports = router;
