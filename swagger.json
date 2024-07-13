@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Monster Hunter API",
+    "description": "Project #2 for CSE341",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateArmor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "ArmorName"
+        },
+        "type": {
+          "type": "string",
+          "example": "ArmorType"
+        },
+        "slots": {
+          "type": "string",
+          "example": "3"
+        },
+        "rank": {
+          "type": "string",
+          "example": "1"
+        },
+        "defense": {
+          "type": "string",
+          "example": "10"
+        }
+      }
+    },
+    "UpdateArmor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "ArmorName"
+        },
+        "type": {
+          "type": "string",
+          "example": "ArmorType"
+        },
+        "slots": {
+          "type": "string",
+          "example": "3"
+        },
+        "rank": {
+          "type": "string",
+          "example": "1"
+        },
+        "defense": {
+          "type": "string",
+          "example": "10"
+        }
+      }
+    },
+    "CreateWeapon": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "WeaponName"
+        },
+        "type": {
+          "type": "string",
+          "example": "WeaponType"
+        },
+        "slots": {
+          "type": "string",
+          "example": "3"
+        },
+        "rank": {
+          "type": "string",
+          "example": "1"
+        },
+        "attack": {
+          "type": "string",
+          "example": "10"
+        },
+        "element": {
+          "type": "string",
+          "example": "fire"
+        },
+        "sharpness": {
+          "type": "string",
+          "example": "20"
+        }
+      }
+    },
+    "UpdateWeapon": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "WeaponName"
+        },
+        "type": {
+          "type": "string",
+          "example": "WeaponType"
+        },
+        "slots": {
+          "type": "string",
+          "example": "3"
+        },
+        "rank": {
+          "type": "string",
+          "example": "1"
+        },
+        "attack": {
+          "type": "string",
+          "example": "10"
+        },
+        "element": {
+          "type": "string",
+          "example": "fire"
+        },
+        "sharpness": {
+          "type": "string",
+          "example": "20"
+        }
+      }
+    }
+  }
+}
