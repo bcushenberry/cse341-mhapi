@@ -34,7 +34,7 @@ const getById = async (req, res, next) => {
     } */
     try {
         const weaponId = req.params.id;
-        checkIdValidity(weaponId, "weapons", "Weapon");
+//        checkIdValidity(weaponId, "weapons", "Weapon");
 
         const response = await mongodb
             .getDb()
@@ -101,7 +101,7 @@ const updateWeapon = async (req, res, next) => {
     } */
     try {
         const weaponId = req.params.id;
-        checkIdValidity(weaponId, "weapons", "Weapon");
+//        checkIdValidity(weaponId, "weapons", "Weapon");
         
         const weapon = {
             name: req.body.name,
@@ -136,7 +136,7 @@ const deleteWeapon = async (req, res, next) => {
     //#swagger.description='Deletes the specified weapon from the database.'
     try {
         const weaponId = req.params.id;
-        checkIdValidity(weaponId, "weapons", "Weapon");
+//        checkIdValidity(weaponId, "weapons", "Weapon");
 
         const result = await mongodb
             .getDb()
