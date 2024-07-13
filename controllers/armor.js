@@ -1,4 +1,5 @@
 const mongodb = require('../db/database');
+const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
 const checkIdValidity = require('../utilities/objectIdCheck')
 
@@ -20,7 +21,7 @@ const getAll = async (req, res, next) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(result);
     } catch (error) {
-        next(error);
+        res.status(500).json({ message: error.message });
     }
 };
 
@@ -34,13 +35,18 @@ const getById = async (req, res, next) => {
     } */
     try {
         const armorId = req.params.id;
-        checkIdValidity(armorId, "armor", "Armor");
+
+        if (!ObjectId.isValid(armorId)) {
+            return next(createError(400,'Invalid armor ID format. Must be a valid ObjectId'));
+        }
+
+        const objectId = new ObjectId(armorId);
 
         const response = await mongodb
             .getDb()
             .db()
             .collection('armor')
-            .findOne({ _id: armorId });
+            .findOne({ _id: objectId });
 
         if (!response) {
             return next(createError(404, 'No such armor was found.'));
@@ -99,7 +105,12 @@ const updateArmor = async (req, res, next) => {
     } */
     try {
         const armorId = req.params.id;
-        checkIdValidity(armorId, "armor", "Armor");
+
+        if (!ObjectId.isValid(armorId)) {
+            return next(createError(400,'Invalid armor ID format. Must be a valid ObjectId'));
+        }
+
+        const objectId = new ObjectId(armorId);
 
         const armor = {
             name: req.body.name,
@@ -112,7 +123,7 @@ const updateArmor = async (req, res, next) => {
             .getDb()
             .db()
             .collection('armor')
-            .replaceOne({ _id: armorId }, armor);
+            .replaceOne({ _id: objectId }, armor);
 
         if (response.modifiedCount > 0) {
             res.status(204).send();
@@ -132,13 +143,18 @@ const deleteArmor = async (req, res, next) => {
     //#swagger.description='Deletes the specified armor from the database.'
     try {
         const armorId = req.params.id;
-        checkIdValidity(armorId, "armor", "Armor");
+
+        if (!ObjectId.isValid(armorId)) {
+            return next(createError(400,'Invalid armor ID format. Must be a valid ObjectId'));
+        }
+
+        const objectId = new ObjectId(armorId);
 
         const result = await mongodb
             .getDb()
             .db()
             .collection('armor')
-            .deleteOne({ _id: armorId });
+            .deleteOne({ _id: objectId });
 
         if (result.deletedCount > 0) {
             res.status(204).send();

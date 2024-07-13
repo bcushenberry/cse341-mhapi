@@ -1,7 +1,6 @@
 const mongodb = require('../db/database');
 const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
-const checkIdValidity = require('../utilities/objectIdCheck')
 
 const getAll = async (req, res, next) => {
     //#swagger.tags=['Weapons']
@@ -21,7 +20,7 @@ const getAll = async (req, res, next) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(result);
     } catch (error) {
-        next(error);
+        res.status(500).json({ message: error.message });
     }
 };
 
@@ -32,13 +31,12 @@ const getById = async (req, res, next) => {
     /* #swagger.parameters['id'] = {
             in: 'path',
             required: 'true',
-
     } */
     try {
         const weaponId = req.params.id;
 
         if (!ObjectId.isValid(weaponId)) {
-            return next(createError(400,'Invalid User ID format. Must be a valid ObjectId'));
+            return next(createError(400,'Invalid weapon ID format. Must be a valid ObjectId'));
         }
 
         const objectId = new ObjectId(weaponId);
@@ -109,7 +107,7 @@ const updateWeapon = async (req, res, next) => {
         const weaponId = req.params.id;
 
         if (!ObjectId.isValid(weaponId)) {
-            return next(createError(400,'Invalid User ID format. Must be a valid ObjectId'));
+            return next(createError(400,'Invalid weapon ID format. Must be a valid ObjectId'));
         }
 
         const objectId = new ObjectId(weaponId);
@@ -149,7 +147,7 @@ const deleteWeapon = async (req, res, next) => {
         const weaponId = req.params.id;
 
         if (!ObjectId.isValid(weaponId)) {
-            return next(createError(400,'Invalid User ID format. Must be a valid ObjectId'));
+            return next(createError(400,'Invalid weapon ID format. Must be a valid ObjectId'));
         }
 
         const objectId = new ObjectId(weaponId);
