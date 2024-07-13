@@ -5,7 +5,7 @@
     "description": "Project #2 for CSE341",
     "version": "1.0.0"
   },
-  "host": "https://cse341-mhapi.onrender.com",
+  "host": "cse341-mhapi.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"

@@ -5,7 +5,7 @@ const doc = {
         title: 'Monster Hunter API',
         description: 'Project #2 for CSE341'
     },
-    host: 'https://cse341-mhapi.onrender.com',
+    host: 'cse341-mhapi.onrender.com',
     schemes: ['https'],
     definitions: {
         CreateArmor: {
