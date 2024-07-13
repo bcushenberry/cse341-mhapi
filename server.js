@@ -9,10 +9,19 @@ const createError = require('http-errors');
 const indexRoutes = require('./routes/index');
 const port = process.env.PORT || 8080;
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+    );
+    res.setHeader('Access-Control-Allow-Origin', 'GET, POST, PUT, DELETE, OPTIONS')
+    next();
+});
 
 // Routes
 app.use('/', indexRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Initialize DB and start server
 mongodb.initDb((err) => {
