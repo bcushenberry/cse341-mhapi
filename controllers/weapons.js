@@ -1,4 +1,5 @@
 const mongodb = require('../db/database');
+const { ObjectId } = require('mongodb');
 const createError = require('http-errors');
 const checkIdValidity = require('../utilities/objectIdCheck')
 
@@ -31,16 +32,21 @@ const getById = async (req, res, next) => {
     /* #swagger.parameters['id'] = {
             in: 'path',
             required: 'true',
+
     } */
     try {
         const weaponId = req.params.id;
-//        checkIdValidity(weaponId, "weapons", "Weapon");
 
+        if (!ObjectId.isValid(weaponId)) {
+            return next(createError(400,'Invalid User ID format. Must be a valid ObjectId'));
+        }
+
+        const objectId = new ObjectId(weaponId);
         const response = await mongodb
             .getDb()
             .db()
             .collection('weapons')
-            .findOne({ _id: weaponId });
+            .findOne({ _id: objectId });
 
         if (!response) {
             return next(createError(404, 'No such weapon was found.'));
@@ -101,8 +107,13 @@ const updateWeapon = async (req, res, next) => {
     } */
     try {
         const weaponId = req.params.id;
-//        checkIdValidity(weaponId, "weapons", "Weapon");
-        
+
+        if (!ObjectId.isValid(weaponId)) {
+            return next(createError(400,'Invalid User ID format. Must be a valid ObjectId'));
+        }
+
+        const objectId = new ObjectId(weaponId);
+
         const weapon = {
             name: req.body.name,
             type: req.body.type,
@@ -116,7 +127,7 @@ const updateWeapon = async (req, res, next) => {
             .getDb()
             .db()
             .collection('weapons')
-            .replaceOne({ _id: weaponId }, weapon);
+            .replaceOne({ _id: objectId }, weapon);
 
         if (response.modifiedCount > 0) {
             res.status(204).send();
@@ -136,13 +147,18 @@ const deleteWeapon = async (req, res, next) => {
     //#swagger.description='Deletes the specified weapon from the database.'
     try {
         const weaponId = req.params.id;
-//        checkIdValidity(weaponId, "weapons", "Weapon");
+
+        if (!ObjectId.isValid(weaponId)) {
+            return next(createError(400,'Invalid User ID format. Must be a valid ObjectId'));
+        }
+
+        const objectId = new ObjectId(weaponId);
 
         const result = await mongodb
             .getDb()
             .db()
             .collection('weapons')
-            .deleteOne({ _id: weaponId });
+            .deleteOne({ _id: objectId });
 
         if (result.deletedCount > 0) {
             res.status(204).send();
