@@ -1,5 +1,5 @@
 require('dotenv').config();
-const cors = require('cors');
+/* const cors = require('cors'); */
 const express = require('express');
 const app = express();
 
@@ -12,12 +12,22 @@ const indexRoutes = require('./routes/index');
 const port = process.env.PORT || 8080;
 
 // Handle preflight requests
-app.options('*', cors());
+/* app.options('*', cors());
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Z-Key']
-}));
+})); */
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers', '*'
+        /* 'Origin, X-Requested-With, Content-Type, Accept, Z-Key' */
+    );
+    res.setHeader('Access-Control-Allow-Origin', 'GET, POST, PUT, DELETE, OPTIONS')
+    next();
+});
 
 // Routes
 app.use('/', indexRoutes);
