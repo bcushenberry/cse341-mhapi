@@ -20,6 +20,236 @@
           }
         }
       }
+    },
+    "/weapons/": {
+      "get": {
+        "tags": [
+          "Weapons"
+        ],
+        "summary": "Get a list of all weapons.",
+        "description": "Retrieves data for all weapons from the database.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Weapons"
+        ],
+        "summary": "Add a new weapon to the database.",
+        "description": "Adds a new weapon to the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add a new weapon.",
+            "schema": {
+              "$ref": "#/definitions/CreateWeapon"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/weapons/{id}": {
+      "get": {
+        "tags": [
+          "Weapons"
+        ],
+        "summary": "Get a weapon by its ID.",
+        "description": "Retrieves data for the specified weapon.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Weapons"
+        ],
+        "summary": "Update a weapon.",
+        "description": "Update an existing weapon.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update an existing weapon.",
+            "schema": {
+              "$ref": "#/definitions/UpdateWeapon"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Weapons"
+        ],
+        "summary": "Delete a weapon.",
+        "description": "Deletes the specified weapon from the database.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/armor/": {
+      "get": {
+        "tags": [
+          "Armor"
+        ],
+        "summary": "Get a list of all armor.",
+        "description": "Retrieves all armor from the database.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Armor"
+        ],
+        "summary": "Create a new armor piece.",
+        "description": "Adds a new armor piece to the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add a new armor piece.",
+            "schema": {
+              "$ref": "#/definitions/CreateArmor"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/armor/{id}": {
+      "get": {
+        "tags": [
+          "Armor"
+        ],
+        "summary": "Get a armor by its ID.",
+        "description": "Retrieves data for the specified armor.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Armor"
+        ],
+        "summary": "Update an armor piece.",
+        "description": "Updates an existing armor piece.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update an existing armor piece.",
+            "schema": {
+              "$ref": "#/definitions/UpdateArmor"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Armor"
+        ],
+        "summary": "Delete a armor.",
+        "description": "Deletes the specified armor from the database.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
     }
   },
   "definitions": {
