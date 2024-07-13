@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const armorController = require('../controllers/armors');
+const armorController = require('../controllers/armor');
 
 // List all armors (GET)
 router.get('/', armorController.getAll);
